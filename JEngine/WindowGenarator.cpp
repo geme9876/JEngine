@@ -50,15 +50,12 @@ WindowGenarator::WindowGenarator(int W, int H, const TCHAR* name) : width(W),hei
 	{
 		throw HR_LAST_EXCEPT();
 	}
-
-
 	hWnd = CreateWindowEx(WindowStyle,
 		WindowClass::GetName(), name,
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, CW_USEDEFAULT, wr.right - wr.left, wr.bottom - wr.top,
 		nullptr, nullptr, WindowClass::GetInstance(), this
 	);
-
 	if (hWnd == nullptr)
 	{
 		throw HR_LAST_EXCEPT();
@@ -442,15 +439,15 @@ const char* WindowGenarator::HRException::what() const noexcept
 
 const char* WindowGenarator::HRException::GetType() const noexcept
 {
-	return nullptr;
+	return "WinGen HRException";
 }
 
 HRESULT WindowGenarator::HRException::GetErrorCode() const noexcept
 {
-	return E_NOTIMPL;
+	return hr;
 }
 
 std::string WindowGenarator::HRException::GetErrorDescription() const noexcept
 {
-	return std::string();
+	return WinGenException::TranslateErrorCode(hr);
 }
