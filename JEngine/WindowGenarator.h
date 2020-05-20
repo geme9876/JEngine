@@ -1,0 +1,86 @@
+#pragma once
+#include "pch.h"
+#include "JException.h"
+#include "Keyboard.h"
+#include "Mouse.h"
+#include <optional>
+#include <memory>
+
+
+#define HR_EXCEPT( hr ) WindowGenarator::HRException( __LINE__,__FILE__,(hr) )
+#define HR_LAST_EXCEPT() WindowGenarator::HRException( __LINE__,__FILE__,GetLastError() )
+
+
+class WindowGenarator
+{
+public:
+	class WinGenException : public JException
+	{
+		using JException::JException;
+	public:
+		static std::string TranslateErrorCode(HRESULT hr) noexcept;
+	};
+	class HRException : public WinGenException
+	{
+	public:
+		HRException(int line, const char* file, HRESULT hr) noexcept;
+		const char* what() const noexcept override;
+		const char* GetType() const noexcept override;
+		HRESULT GetErrorCode() const noexcept;
+		std::string GetErrorDescription() const noexcept;
+	private:
+		HRESULT hr;
+	};
+private:
+	class WindowClass
+	{
+	public:
+		static const TCHAR* GetName() noexcept;
+		static HINSTANCE GetInstance() noexcept;
+	private:
+		WindowClass() noexcept;
+		~WindowClass();
+		WindowClass(const WindowClass&) = delete;
+		WindowClass& operator= (const WindowClass&) = delete;
+
+
+		static constexpr const TCHAR* wndClassName = _T("This will be WindowClassName");
+		static WindowClass wndClass;
+		HINSTANCE hInst;
+	};
+public:
+	WindowGenarator(int W, int H, const TCHAR* name);
+	~WindowGenarator();
+	WindowGenarator(const WindowGenarator&) = delete;
+	WindowGenarator& operator=(const WindowGenarator&) = delete;
+	void SetTitle(const tstring& title);
+	void EnableCursor() noexcept;
+	void DisableCursor() noexcept;
+	bool IsCursorEnable() const noexcept;
+	static std::optional<int> ProcessMessages() noexcept;
+
+	const Keyboard& GetKeyboard() const noexcept { return kbd; }
+	const Mouse& GetMouse() const  noexcept { return mouse; }
+
+private:
+	void ConfineCursor() noexcept;
+	void FreeCursor() noexcept;
+	void ShowCursor() noexcept;
+	void HideCursor() noexcept;
+	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+	static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+
+
+private:
+	Keyboard kbd;
+	Mouse mouse;
+private:
+	bool cursorEnabled = true;
+	int width;
+	int height;
+	HWND hWnd;
+	std::vector<BYTE> rawBuffer;
+};
+
+
