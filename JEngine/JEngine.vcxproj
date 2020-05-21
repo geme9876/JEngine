@@ -112,7 +112,7 @@ copy "*.inl" "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\Include\
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions);IS_DEBUG=true;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -170,7 +170,7 @@ copy "*.inl" "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\Include\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions);IS_DEBUG=false;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -192,15 +192,33 @@ copy "*.inl" "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\Include\
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Binder.h" />
+    <ClInclude Include="BinderManager.h" />
+    <ClInclude Include="BufferResource.h" />
+    <ClInclude Include="dxerr.h" />
+    <ClInclude Include="DxgiInfoManager.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="GraphicsMacro.h" />
+    <ClInclude Include="GraphicsResource.h" />
+    <ClInclude Include="JCore.h" />
     <ClInclude Include="JException.h" />
     <ClInclude Include="JTimer.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="WindowGenarator.h" />
+    <ClInclude Include="WinGenMacro.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Binder.cpp" />
+    <ClCompile Include="dxerr.cpp" />
+    <ClCompile Include="DxgiInfoManager.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="GraphicsResource.cpp" />
+    <ClCompile Include="JCore.cpp" />
     <ClCompile Include="JException.cpp" />
     <ClCompile Include="JTimer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -211,7 +229,14 @@ copy "*.inl" "$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\Include\
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="WindowGenarator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXGetErrorDescription.inl" />
+    <None Include="DXGetErrorString.inl" />
+    <None Include="DXTrace.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

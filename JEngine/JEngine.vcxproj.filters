@@ -22,6 +22,18 @@
     <Filter Include="Input">
       <UniqueIdentifier>{94a826eb-3140-4546-b957-5541a4f0ec63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{4c4a7ebf-20d7-4d13-90a8-d87f48d1c264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Binder">
+      <UniqueIdentifier>{c90ea13a-6fb0-422a-b291-27355dc23236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Drawer">
+      <UniqueIdentifier>{808a1bb4-67c8-448d-a4bd-8e3a935eeea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DxErr">
+      <UniqueIdentifier>{319e117c-0404-4196-93bd-39cba0a17965}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -45,6 +57,30 @@
     <ClInclude Include="Mouse.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="JCore.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsMacro.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsResource.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DxgiInfoManager.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="WinGenMacro.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="dxerr.h">
+      <Filter>DxErr</Filter>
+    </ClInclude>
+    <ClInclude Include="Binder.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGenarator.cpp">
@@ -65,5 +101,34 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="JCore.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsResource.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DxgiInfoManager.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="dxerr.cpp">
+      <Filter>DxErr</Filter>
+    </ClCompile>
+    <ClCompile Include="Binder.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXGetErrorDescription.inl">
+      <Filter>DxErr</Filter>
+    </None>
+    <None Include="DXGetErrorString.inl">
+      <Filter>DxErr</Filter>
+    </None>
+    <None Include="DXTrace.inl">
+      <Filter>DxErr</Filter>
+    </None>
   </ItemGroup>
 </Project>

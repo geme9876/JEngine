@@ -21,3 +21,7 @@ typedef std::string tstring;
 #endif
 
 #endif //PCH_H
+
+
+
+#define noxnd noexcept(!IS_DEBUG)

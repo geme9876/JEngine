@@ -1,14 +1,11 @@
 #pragma once
 #include "pch.h"
 #include "JException.h"
+#include "WinGenMacro.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 #include <optional>
 #include <memory>
-
-
-#define HR_EXCEPT( hr ) WindowGenarator::HRException( __LINE__,__FILE__,(hr) )
-#define HR_LAST_EXCEPT() WindowGenarator::HRException( __LINE__,__FILE__,GetLastError() )
 
 
 class WindowGenarator
@@ -30,6 +27,12 @@ public:
 		std::string GetErrorDescription() const noexcept;
 	private:
 		HRESULT hr;
+	};
+	class NoGfxException : public WinGenException
+	{
+	public:
+		using WinGenException::WinGenException;
+		const char* GetType() const noexcept override;
 	};
 private:
 	class WindowClass
@@ -59,8 +62,8 @@ public:
 	bool IsCursorEnable() const noexcept;
 	static std::optional<int> ProcessMessages() noexcept;
 
-	const Keyboard& GetKeyboard() const noexcept { return kbd; }
-	const Mouse& GetMouse() const  noexcept { return mouse; }
+	Keyboard& GetKeyboard() noexcept { return kbd; }
+	Mouse& GetMouse()  noexcept { return mouse; }
 
 private:
 	void ConfineCursor() noexcept;

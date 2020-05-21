@@ -1,6 +1,5 @@
 #pragma once
 #include "WindowGenarator.h"
-#pragma comment( lib, "JEngine")
 
 
 

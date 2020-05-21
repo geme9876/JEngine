@@ -50,7 +50,8 @@ WindowGenarator::WindowGenarator(int W, int H, const TCHAR* name) : width(W),hei
 	{
 		throw HR_LAST_EXCEPT();
 	}
-	hWnd = CreateWindowEx(WindowStyle,
+
+	hWnd = CreateWindow(
 		WindowClass::GetName(), name,
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, CW_USEDEFAULT, wr.right - wr.left, wr.bottom - wr.top,
@@ -450,4 +451,9 @@ HRESULT WindowGenarator::HRException::GetErrorCode() const noexcept
 std::string WindowGenarator::HRException::GetErrorDescription() const noexcept
 {
 	return WinGenException::TranslateErrorCode(hr);
+}
+
+const char* WindowGenarator::NoGfxException::GetType() const noexcept
+{
+	return "Not Find Graphics";
 }
